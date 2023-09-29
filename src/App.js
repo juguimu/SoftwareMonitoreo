@@ -3,6 +3,7 @@ import './App.css';
 import { UserLogging } from './UserLogging/';
 import { UserInfo } from './UserInfo/';
 import { UserNav } from './UserNav/';
+import { GroupInfo } from './GroupInfo';
 
 
 
@@ -11,7 +12,9 @@ function App() {
     {
       "loggingWindow":"",
       "navBar":"inactive",
-      "userInfoWindow":"inactive"
+      "userInfoWindow":"inactive",
+      "groupInfoWindow":"inactive",
+      "monitorInfoWindow":"inactive"
     }
   );
   const [userData,setuserData]=React.useState(
@@ -25,6 +28,14 @@ function App() {
       "name":"",
       "clientId":""}
   );
+  const [groupData,setgroupData]=React.useState(
+    {"isActive":true,
+    "monitors":[{"name":"","entryDate":"","monitorId":""}],
+    "clientGroupMonitorId":"",
+    "clientId":""}
+  );
+
+
   return (
     <>
       <UserNav
@@ -42,6 +53,13 @@ function App() {
         userData={userData}
         showWindow={showWindow}
         setshowWindow={setshowWindow}
+        setgroupData={setgroupData}
+      />
+
+      <GroupInfo 
+        showWindow={showWindow}
+        setshowWindow={setshowWindow}
+        groupData={groupData}
       />
      
     </>

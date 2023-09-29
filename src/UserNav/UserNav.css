@@ -47,6 +47,8 @@
 .right-nav ul a:hover{
     border: 1px solid var(--black);
     font-weight: bold;
+    
+    
 }
 
 .inactive{

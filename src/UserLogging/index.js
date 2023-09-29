@@ -37,13 +37,15 @@ function UserLogging(
                         // )
                         // .catch(() => seterrorLog("")
                         // );
-                        const stringData='{"groups":[{"name":"Casa","entryDate":"2023-08-06","groupId":"74f9ae48-36ce-4b4e-bdd3-3899fa886b02"}],"isActive":true,"clientGroupMonitorId":"client","lastName":"Gallo","email":"memogallo@gmail.com","phone":"3104076157","name":"Guillermo","clientId":"1053779590"}';
+                        const stringData='{"groups":[{"name":"Casa","entryDate":"2023-08-06","groupId":"74f9ae48-36ce-4b4e-bdd3-3899fa886b02"},{"name":"Casa2","entryDate":"2023-09-06","groupId":"74f9ae48-36ce-4b4e-bdd3-3899fa886b03"}],"isActive":true,"clientGroupMonitorId":"client","lastName":"Gallo","email":"memogallo@gmail.com","phone":"3104076157","name":"Guillermo","clientId":"1053779590"}';
                         setuserData(JSON.parse(stringData));
                         setshowWindow(
                             {
                                 "loggingWindow":"inactive",
                                 "navBar":"",
-                                "userInfoWindow":""
+                                "userInfoWindow":"",
+                                "groupInfoWindow":"inactive",
+                                "monitorInfoWindow":"inactive"
                             }
                         );
                 }   

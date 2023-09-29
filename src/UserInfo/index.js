@@ -1,11 +1,14 @@
 import React from 'react';
 import './UserInfo.css';
+import { ItemGroup } from './ItemGroup';
+
 
 
 function UserInfo(
     {userData,
     showWindow,
-    setshowWindow}
+    setshowWindow,
+    setgroupData}
 ){
 
     let userState="Inactivo";
@@ -31,9 +34,18 @@ function UserInfo(
         <div className="user-groups">
             <p>Grupos</p>
             <ul>
-                <li>
-                    <a href="/" className="item-group">Casa</a>
-                </li>
+                {userData.groups.map(value =>
+                <ItemGroup
+                    key={value.name}
+                    name={value.name}
+                    groupId={value.groupId}
+                    setshowWindow={setshowWindow}
+                    clientId={userData.clientId}
+                    setgroupData={setgroupData}
+                />
+                )}
+
+                
             </ul>
         </div>
 

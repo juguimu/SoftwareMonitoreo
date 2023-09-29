@@ -42,8 +42,11 @@
 .item-group{
     font-size: var(--sm);
     color: var(--black);
-    
+}
 
+.item-group:hover{
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .inactive{
