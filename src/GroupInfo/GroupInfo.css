@@ -1,0 +1,47 @@
+.title{
+    font-size: var(--lg);
+    font-weight: bold;
+}
+
+.data-monitor{
+
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+
+
+
+
+.user-monitor{
+margin-top: 40px;
+width: 300px;
+display: flex;
+flex-direction: column;
+}
+
+.items{
+margin-bottom: 24px;
+}
+
+
+.user-monitor ul{
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.item-monitor{
+font-size: var(--sm);
+color: var(--black);
+}
+
+.item-monitor:hover{
+font-weight: bold;
+ cursor: pointer;
+}
+
+.inactive{
+    display: none;
+}

@@ -1,0 +1,24 @@
+.data-visualization{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .table-header{
+    display: grid;
+    grid-template-columns: repeat(7,120px);
+    font-weight: bold;
+    font-size: var(--md);
+    border-bottom: 1px solid gray;
+    padding: 4px;
+}
+
+.table-content{
+    display: grid;
+    grid-template-columns: repeat(7,120px);
+    padding: 4px;
+}
+
+.inactive{
+    display: none;
+}
