@@ -8,7 +8,9 @@ function UserInfo(
     {userData,
     showWindow,
     setshowWindow,
-    setgroupData}
+    setgroupData,
+    setshownavOptions    
+    }
 ){
 
     let userState="Inactivo";
@@ -42,6 +44,7 @@ function UserInfo(
                     setshowWindow={setshowWindow}
                     clientId={userData.clientId}
                     setgroupData={setgroupData}
+                    setshownavOptions={setshownavOptions}
                 />
                 )}
 

@@ -7,7 +7,9 @@ function UserNav(
     setshowWindow,
     setuserData,
     setgroupData,
-    setdataMonitor
+    setdataMonitor,
+    shownavOptions,
+    setshownavOptions
     }
 ){ 
     return (
@@ -18,15 +20,54 @@ function UserNav(
 
         <div className="right-nav">
             <ul>
-                {/* <li>
-                    <a href="/" className="nav-user">Usuario</a>
+                <li>
+                    <a className="nav-user"
+                    onClick={()=>{
+                        setshowWindow(
+                            {
+                            "loggingWindow":"inactive",
+                            "navBar":"",
+                            "userInfoWindow":"",
+                            "groupInfoWindow":"inactive",
+                            "monitorInfoWindow":"inactive"
+                            }
+                        );
+
+                    }}
+                    >Usuario</a>
                 </li>
                 <li>
-                    <a href="/" className="nav-group">Grupos</a>
+                    <a className={`nav-group ${shownavOptions.navGroup}`}
+                    onClick={()=>{
+                        setshowWindow(
+                            {
+                            "loggingWindow":"inactive",
+                            "navBar":"",
+                            "userInfoWindow":"inactive",
+                            "groupInfoWindow":"",
+                            "monitorInfoWindow":"inactive"
+                            }
+                        );
+
+                    }}
+                    >Grupo</a>
                 </li>
                 <li>
-                    <a href="/" className="nav-monitors">Monitores</a>
-                </li> */}
+                    <a className={`nav-monitors ${shownavOptions.navMonitors}`}
+                    onClick={()=>{
+                        setshowWindow(
+                            {
+                            "loggingWindow":"inactive",
+                            "navBar":"",
+                            "userInfoWindow":"inactive",
+                            "groupInfoWindow":"inactive",
+                            "monitorInfoWindow":""
+                            }
+                        );
+
+                    }}
+                    >Monitor</a>
+                </li>
                 <li>
                     <a className="nav-salir"
                     onClick={()=>{
@@ -62,6 +103,12 @@ function UserNav(
                             "groupInfoWindow":"inactive",
                             "monitorInfoWindow":"inactive"
                             }
+                        );
+                        setshownavOptions(
+                            {
+                                "navGroup":"inactive",
+                                "navMonitors":"inactive"
+                            }                          
                         );
                     }}
                     >Salir</a>

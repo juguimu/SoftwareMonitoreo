@@ -18,6 +18,15 @@ function App() {
       "monitorInfoWindow":"inactive"
     }
   );
+  
+  const [shownavOptions,setshownavOptions]=React.useState(
+    {
+      "navGroup":"inactive",
+      "navMonitors":"inactive"
+    }
+  );
+
+
   const [userData,setuserData]=React.useState(
     {"groups":[{
       "name":"","entryDate":"","groupId":""}],
@@ -55,6 +64,8 @@ function App() {
         setuserData={setuserData}
         setgroupData={setgroupData}
         setdataMonitor={setdataMonitor}
+        shownavOptions={shownavOptions}
+        setshownavOptions={setshownavOptions}
       />
       <UserLogging
         userData={userData}
@@ -68,6 +79,7 @@ function App() {
         showWindow={showWindow}
         setshowWindow={setshowWindow}
         setgroupData={setgroupData}
+        setshownavOptions={setshownavOptions}
       />
 
       <GroupInfo 
@@ -75,6 +87,7 @@ function App() {
         setshowWindow={setshowWindow}
         groupData={groupData}
         setdataMonitor={setdataMonitor}
+        setshownavOptions={setshownavOptions}
       />
 
       <MonitorInfo
