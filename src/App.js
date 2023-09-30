@@ -52,6 +52,9 @@ function App() {
       <UserNav
         showWindow={showWindow}
         setshowWindow={setshowWindow}
+        setuserData={setuserData}
+        setgroupData={setgroupData}
+        setdataMonitor={setdataMonitor}
       />
       <UserLogging
         userData={userData}

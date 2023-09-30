@@ -4,7 +4,11 @@ import './UserNav.css';
 
 function UserNav(
     {showWindow,
-    setshowWindow}
+    setshowWindow,
+    setuserData,
+    setgroupData,
+    setdataMonitor
+    }
 ){ 
     return (
     <nav className={`user-nav ${showWindow.navBar}`}>
@@ -24,7 +28,43 @@ function UserNav(
                     <a href="/" className="nav-monitors">Monitores</a>
                 </li> */}
                 <li>
-                    <a href="/" className="nav-salir">Salir</a>
+                    <a className="nav-salir"
+                    onClick={()=>{
+                        setuserData(
+                            {"groups":[{
+                            "name":"","entryDate":"","groupId":""}],
+                            "isActive":0,
+                            "clientGroupMonitorId":"",
+                            "lastName":"",
+                            "email":"",
+                            "phone":"",
+                            "name":"",
+                            "clientId":""}
+                        );
+                        setgroupData(
+                            {"isActive":true,
+                            "monitors":[{"name":"","entryDate":"","monitorId":""}],
+                            "clientGroupMonitorId":"",
+                            "clientId":""}
+                        );
+                        setdataMonitor(
+                            {"variables":["V_A","I_A","PA_A","EA_A_I","F","FP_A"],
+                            "isActive":0,
+                            "clientGroupMonitorId":"74f9ae48-36ce-4b4e-bdd3-3899fa886b02.796b2cc2-b848-4e16-bf17-ff506b5d0602",
+                            "measures":[{"timestamp":0,"values":[0,0,0,0,0,0]}],
+                            "clientId":"1053779590"}
+                        );
+                        setshowWindow(
+                            {
+                            "loggingWindow":"",
+                            "navBar":"inactive",
+                            "userInfoWindow":"inactive",
+                            "groupInfoWindow":"inactive",
+                            "monitorInfoWindow":"inactive"
+                            }
+                        );
+                    }}
+                    >Salir</a>
                 </li>
             </ul>
         </div>
