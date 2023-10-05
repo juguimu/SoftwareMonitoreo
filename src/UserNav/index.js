@@ -9,7 +9,8 @@ function UserNav(
     setgroupData,
     setdataMonitor,
     shownavOptions,
-    setshownavOptions
+    setshownavOptions,
+    navbarValues
     }
 ){ 
     return (
@@ -34,7 +35,7 @@ function UserNav(
                         );
 
                     }}
-                    >Usuario</a>
+                    >{navbarValues.userName}</a>
                 </li>
                 <li>
                     <a className={`nav-group ${shownavOptions.navGroup}`}
@@ -50,7 +51,7 @@ function UserNav(
                         );
 
                     }}
-                    >Grupo</a>
+                    >{navbarValues.groupName}</a>
                 </li>
                 <li>
                     <a className={`nav-monitors ${shownavOptions.navMonitors}`}
@@ -66,7 +67,7 @@ function UserNav(
                         );
 
                     }}
-                    >Monitor</a>
+                    >{navbarValues.monitorName}</a>
                 </li>
                 <li>
                     <a className="nav-salir"

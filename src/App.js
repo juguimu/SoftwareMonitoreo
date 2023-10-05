@@ -55,6 +55,14 @@ function App() {
     }
   );
 
+  const [navbarValues,setnavbarValues]=React.useState(
+    {
+      "userName":"",
+      "groupName":"",
+      "monitorName":""
+    }
+  );
+
 
   return (
     <>
@@ -66,12 +74,16 @@ function App() {
         setdataMonitor={setdataMonitor}
         shownavOptions={shownavOptions}
         setshownavOptions={setshownavOptions}
+        navbarValues ={navbarValues}
+
       />
       <UserLogging
         userData={userData}
         setuserData={setuserData}
         showWindow={showWindow}
         setshowWindow={setshowWindow}
+        navbarValues={navbarValues}
+        setnavbarValues={setnavbarValues}
       />
     
       <UserInfo
@@ -80,6 +92,8 @@ function App() {
         setshowWindow={setshowWindow}
         setgroupData={setgroupData}
         setshownavOptions={setshownavOptions}
+        navbarValues={navbarValues}
+        setnavbarValues={setnavbarValues}
       />
 
       <GroupInfo 
@@ -88,6 +102,8 @@ function App() {
         groupData={groupData}
         setdataMonitor={setdataMonitor}
         setshownavOptions={setshownavOptions}
+        navbarValues={navbarValues}
+        setnavbarValues={setnavbarValues}
       />
 
       <MonitorInfo

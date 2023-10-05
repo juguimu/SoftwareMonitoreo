@@ -9,32 +9,27 @@ function UserInfo(
     showWindow,
     setshowWindow,
     setgroupData,
-    setshownavOptions    
+    setshownavOptions,
+    navbarValues,
+    setnavbarValues    
     }
 ){
 
-    let userState="Inactivo";
+    let userState="Inactiva";
     if(userData.isActive){
-        userState="Activo";
+        userState="activa";
     }
+
+  
+
     
     return (
         <div className={`data-info ${showWindow.userInfoWindow}`}>
-        <h1 className="title">Datos del Usuario</h1>
+        <h1 className="title">Hola {`${userData.name} ${userData.lastName}!`}</h1>
         <div className="user-data">
-            <p className="user-item">Nombre:</p>
-            <p className="user-name value">{userData.name +" " + userData.lastName}</p>
-            <p className="user-item">Identificacion:</p>
-            <p className="user-id value">{userData.clientId}</p>
-            <p className="user-item">Estatus:</p>
-            <p className="user-status value">{userState}</p>
-            <p className="user-item">email:</p>
-            <p className="user-email value">{userData.email}</p>
-            <p className="user-item">Telefono:</p>
-            <p className="user-phone value">{userData.phone}</p>
+            <p className="user-item">Actualmente su cuenta se encuentra {`${userState}`}. A continuaci&oacute;n se listan los grupos registrados:</p>
         </div>
         <div className="user-groups">
-            <p>Grupos</p>
             <ul>
                 {userData.groups.map(value =>
                 <ItemGroup
@@ -45,6 +40,8 @@ function UserInfo(
                     clientId={userData.clientId}
                     setgroupData={setgroupData}
                     setshownavOptions={setshownavOptions}
+                    navbarValues={navbarValues}
+                    setnavbarValues={setnavbarValues}
                 />
                 )}
 

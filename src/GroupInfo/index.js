@@ -8,7 +8,10 @@ function GroupInfo(
     setshowWindow,
     groupData,
     setdataMonitor,
-    setshownavOptions}
+    setshownavOptions,
+    navbarValues,
+    setnavbarValues
+}
 ){   
     return (
         
@@ -25,6 +28,8 @@ function GroupInfo(
                             groupData={groupData}
                             setdataMonitor={setdataMonitor}
                             setshownavOptions={setshownavOptions}
+                            navbarValues={navbarValues}
+                            setnavbarValues={setnavbarValues}
                         />
                     )}
                 </ul>

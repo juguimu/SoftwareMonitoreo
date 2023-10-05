@@ -3,17 +3,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    justify-items: center;
 }
 
-.user-data{
+/* .user-data{
     width: 300px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
+} */
 
 .user-item{
     font-size: var(--sm);
     font-weight: 50%;
+    width: 400px;
 }
 
 .value{
@@ -22,26 +25,32 @@
 }
 
 .user-groups{
-    margin-top: 40px;
-    width: 300px;
+    margin-top: 4px;
+    width: 400px;
     display: flex;
     flex-direction: column;
 }
-
+/* 
 .user-groups p{
     font-size: var(--md);
     font-weight: bold;        
-}
+} */
 
 .user-groups ul{
-    list-style: none;
+    list-style: disc;
     margin: 0;
     padding: 0;
+}
+
+.user-groups ul li{
+    margin-bottom: 24px;
+    margin-left: 16px;
 }
 
 .item-group{
     font-size: var(--sm);
     color: var(--black);
+    font-weight: 300%;
 }
 
 .item-group:hover{
