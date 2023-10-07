@@ -1,3 +1,13 @@
+:root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --red: #FF0000; 
+    --sm: 14px;
+    --md: 20px;
+    --lg: 34px;
+}
+
+
 .data-visualization{
     display: flex;
     flex-direction: column;
@@ -12,6 +22,49 @@
     border-bottom: 1px solid gray;
     padding: 4px;
 }
+
+
+.figures-data{
+    display: grid;
+    grid-template-columns: repeat(3,400px);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.item-figure{
+    height: 200px;
+}
+
+
+.valuesboxes-data{
+    display: grid;
+    grid-template-columns: repeat(3,300px);
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+
+}
+
+.data-box{
+    
+    border: 1px solid var(--black);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.data-box p{
+    margin-top: 0;
+    text-align: center;
+    font-size: var(--sm);
+}
+
+.data-box div p{
+    margin-top: 0;
+    text-align: center;
+    font-size: var(--lg);
+}
+
+
 
 .table-content{
     display: grid;
