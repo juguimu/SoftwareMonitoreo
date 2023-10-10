@@ -109,6 +109,7 @@ function App() {
       <MonitorInfo
         showWindow={showWindow}
         dataMonitor={dataMonitor}
+        navbarValues={navbarValues}
       />
      
     </>

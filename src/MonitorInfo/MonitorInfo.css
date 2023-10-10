@@ -26,13 +26,28 @@
 
 .figures-data{
     display: grid;
-    grid-template-columns: repeat(3,400px);
+    grid-template-columns: repeat(2,500px);
     gap: 40px;
     margin-bottom: 40px;
 }
 
 .item-figure{
-    height: 200px;
+    height: 300px;
+}
+
+.update-button{
+    cursor: pointer;
+    font-size: var(--md);
+    width: 200px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--black);
+    font-weight: bold;
+    margin-top: 24px;
+}
+
+.text-items{
+    margin-bottom: 0;
 }
 
 
@@ -42,6 +57,7 @@
     align-items: center;
     justify-content: center;
     gap: 100px;
+    margin-bottom: 40px;
 
 }
 

@@ -33,7 +33,7 @@ function ItemGroup(
 
                         props.setnavbarValues({...props.navbarValues,
                                 "groupName":props.name
-                        })
+                        });
 
                         // const url = 'https://vu5h0yvf80.execute-api.us-west-2.amazonaws.com/client/'+props.clientId+'/'+props.groupId;
                         //     fetch(url).then(response => response.json()).then(data =>{
@@ -53,6 +53,9 @@ function ItemGroup(
                         //                 "navMonitors":"inactive"
                         //             }
                         //         );
+                        //         props.setnavbarValues({...props.navbarValues,
+                        //             "groupName":props.name
+                        //         });
                                 
                         //         // console.log(data);                                            
                         //     }

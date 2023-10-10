@@ -2,13 +2,20 @@ import React from 'react';
 import './MonitorInfo.css';
 import { ItemData } from './ItemData';
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+
+
 import {Bar} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
     BarElement,
+    LineElement,
     Title,
     Tooltip,
     Legend,
@@ -20,6 +27,7 @@ ChartJS.register(
     LinearScale,
     PointElement,
     BarElement,
+    LineElement,
     Title,
     Tooltip,
     Legend,
@@ -29,18 +37,30 @@ ChartJS.register(
 
 function MonitorInfo(
     {showWindow,
-    dataMonitor}
+    dataMonitor,
+    navbarValues}
    ){   
 
+    const [startDate, setStartDate] = React.useState(new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000));
+    const [endDate, setEndDate] = React.useState(new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000));
+    const [dataFilterMonitor,setdataFilterMonitor] = React.useState(
+        dataMonitor.measures.filter((value) => value.timestamp <= endDate.getTime()/1000 && value.timestamp >= startDate.getTime()/1000 )
+    );
 
-    let timestamp = dataMonitor.measures.map((value) => new Date(value.timestamp*1000).toLocaleTimeString());
+let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).toLocaleDateString());
+
+
+// let timestamp = dataMonitor.measures.map((value) => value.timestamp);
 
    let paData = {
     labels: timestamp,
     datasets: [ // Cada una de las líneas del gráfico
         {
             label: 'Potencia [W]',
-            data: dataMonitor.measures.map((value) => value.values[2])
+            data: dataFilterMonitor.map((value) => value.values[2]),
+            borderColor: 'rgb(33, 56, 222)',
+            backgroundColor: 'rgba(33, 56, 222, 0.5)',
+
         }
     ]
    };
@@ -50,7 +70,9 @@ function MonitorInfo(
     datasets: [ // Cada una de las líneas del gráfico
         {
             label: 'Energía Consumida [kW/h]',
-            data: dataMonitor.measures.map((value) => value.values[3])
+            data: dataFilterMonitor.map((value) => value.values[3]),
+            borderColor: 'rgb(2, 104, 11)',
+            backgroundColor: 'rgba(2, 104, 11, 0.5)',
         }
     ]
    };
@@ -60,26 +82,40 @@ function MonitorInfo(
     datasets: [ // Cada una de las líneas del gráfico
         {
             label: 'Factor de potencia',
-            data: dataMonitor.measures.map((value) => value.values[5])
+            data: dataFilterMonitor.map((value) => value.values[5]),
+            borderColor: 'rgb(24, 155, 250)',
+            backgroundColor: 'rgba(24, 155, 250, 0.5)',
         }
     ]
    };
 
-   let mioptions = {
+   let mioptions= {
+        scales:{
+            x: {
+                
+                ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 10
+                }
+                
+               
+            } 
+            
+        }    
     
     };
 
     // promedios
     
-    let Va = dataMonitor.measures.map((value) => value.values[0]);
+    let Va = dataFilterMonitor.map((value) => value.values[0]);
 
     let Vaprom = Va.reduce((acum,x)=>acum+x,0)/Va.length;
 
-    let Ia = dataMonitor.measures.map((value) => value.values[1]);
+    let Ia = dataFilterMonitor.map((value) => value.values[1]);
 
     let Iaprom = Ia.reduce((acum,x)=>acum+x,0)/Ia.length;
 
-    let f = dataMonitor.measures.map((value) => value.values[4]);
+    let f = dataFilterMonitor.map((value) => value.values[4]);
 
     let fprom = f.reduce((acum,x)=>acum+x,0)/f.length;
 
@@ -94,7 +130,7 @@ function MonitorInfo(
     return (
         <div className={`data-visualization ${showWindow.monitorInfoWindow}`}>
             <div> 
-                <div className="table-header">
+                {/* <div className="table-header">
                         <p>
                             Fecha
                         </p>
@@ -126,17 +162,9 @@ function MonitorInfo(
                             timestamp={value.timestamp}
                             values={value.values}
                         />
-                )}
+                )} */}
 
-                <button onClick={()=>{
-
-                    let timestamp = dataMonitor.measures.map((value) => value.timestamp);
-
-
-
-                    console.log(new Date(timestamp[0]).toLocaleDateString());// dos decimales
-
-                }}>Pruebas</button>
+                
 
                 
 
@@ -152,13 +180,58 @@ function MonitorInfo(
             </div>
             <div className='figures-data'>
                     <div className='item-figure'>
-                        <Bar  
+                        <div className='Filter-box'>
+                            <h1 className='dashboard-title'>{navbarValues.monitorName}</h1>
+
+                            <p className='text-items'>Fecha Inicial</p>
+
+                            <div className='date-input'>    
+                                <DatePicker
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                selectsStart
+                                startDate={startDate}
+                                endDate={endDate}
+                                />
+                            </div>
+
+                            <p className='text-items'>Fecha Final</p>
+
+                            <div className='date-input'>  
+                                <DatePicker
+                                selected={endDate}
+                                onChange={(date) => setEndDate(date)}
+                                selectsEnd
+                                startDate={startDate}
+                                endDate={endDate}
+                                minDate={startDate}
+                                />
+                            </div>
+
+                            <button className='update-button' onClick={()=>{
+
+                                let timestamp = dataMonitor.measures.map((value) => value.timestamp);
+
+                                setdataFilterMonitor(
+                                    dataMonitor.measures.filter((value) => value.timestamp <= endDate.getTime()/1000 && value.timestamp >= startDate.getTime()/1000)
+                                );
+
+                                console.log(dataFilterMonitor);// dos decimales
+
+                            }}>Actualizar</button>
+
+                        </div>
+                    </div>
+
+
+                    <div className='item-figure'>
+                        <Line  
                             data = {paData}
                             options = {mioptions} 
                         />
                     </div>
                     <div className='item-figure'>
-                        <Bar 
+                        <Line 
                             data = {eaData}
                             options = {mioptions} 
                         />
