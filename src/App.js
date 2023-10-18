@@ -63,6 +63,17 @@ function App() {
     }
   );
 
+  const [startDate, setStartDate] = React.useState(
+    new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000)
+    );
+  const [endDate, setEndDate] = React.useState(
+    new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000)
+    );
+
+    const [dataFilterMonitor,setdataFilterMonitor] = React.useState(
+      dataMonitor.measures.filter((value) => value.timestamp <= endDate.getTime()/1000 && value.timestamp >= startDate.getTime()/1000 )
+    );
+
 
   return (
     <>
@@ -104,12 +115,21 @@ function App() {
         setshownavOptions={setshownavOptions}
         navbarValues={navbarValues}
         setnavbarValues={setnavbarValues}
+        setStartDate = {setStartDate}
+        setEndDate = {setEndDate}
+        setdataFilterMonitor={setdataFilterMonitor}
       />
 
       <MonitorInfo
         showWindow={showWindow}
         dataMonitor={dataMonitor}
         navbarValues={navbarValues}
+        startDate = {startDate}
+        setStartDate = {setStartDate}
+        endDate = {endDate}
+        setEndDate = {setEndDate}
+        dataFilterMonitor={dataFilterMonitor}
+        setdataFilterMonitor={setdataFilterMonitor}
       />
      
     </>

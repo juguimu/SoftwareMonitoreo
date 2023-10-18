@@ -38,14 +38,20 @@ ChartJS.register(
 function MonitorInfo(
     {showWindow,
     dataMonitor,
-    navbarValues}
+    navbarValues,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    dataFilterMonitor,
+    setdataFilterMonitor}
    ){   
 
-    const [startDate, setStartDate] = React.useState(new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000));
-    const [endDate, setEndDate] = React.useState(new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000));
-    const [dataFilterMonitor,setdataFilterMonitor] = React.useState(
-        dataMonitor.measures.filter((value) => value.timestamp <= endDate.getTime()/1000 && value.timestamp >= startDate.getTime()/1000 )
-    );
+    // const [startDate, setStartDate] = React.useState(new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000));
+    // const [endDate, setEndDate] = React.useState(new Date(dataMonitor.measures[dataMonitor.measures.length-1].timestamp*1000));
+    // const [dataFilterMonitor,setdataFilterMonitor] = React.useState(
+    //     dataMonitor.measures.filter((value) => value.timestamp <= endDate.getTime()/1000 && value.timestamp >= startDate.getTime()/1000 )
+    // );
 
 let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).toLocaleDateString());
 

@@ -28,7 +28,21 @@ function ItemMonitor(
                     {"timestamp":1695044752,"values":[126.5,1.562,145.7,0.575,60,0.74]},
                     {"timestamp":1695048340,"values":[125.9,0,0.6,0.632,59.9,1]}
                 ],
-                "clientId":"1053779590"};    
+                "clientId":"1053779590"}; 
+                
+                let startDate = stringmonitorData.measures[0].timestamp;
+                let endDate = stringmonitorData.measures[
+                    stringmonitorData.measures.length-1].timestamp;
+                
+                props.setStartDate(new Date(startDate*1000));
+                props.setEndDate(new Date(endDate*1000));
+
+                props.setdataFilterMonitor(
+                    stringmonitorData.measures.filter((value) => 
+                    value.timestamp <= endDate && 
+                        value.timestamp >= startDate)
+                );
+
                 props.setdataMonitor(stringmonitorData);
                 
                         // console.log(data);

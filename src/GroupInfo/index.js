@@ -10,7 +10,10 @@ function GroupInfo(
     setdataMonitor,
     setshownavOptions,
     navbarValues,
-    setnavbarValues
+    setnavbarValues,
+    setStartDate,
+    setEndDate,
+    setdataFilterMonitor
 }
 ){   
     return (
@@ -30,6 +33,9 @@ function GroupInfo(
                             setshownavOptions={setshownavOptions}
                             navbarValues={navbarValues}
                             setnavbarValues={setnavbarValues}
+                            setStartDate = {setStartDate}
+                            setEndDate = {setEndDate}
+                            setdataFilterMonitor = {setdataFilterMonitor}
                         />
                     )}
                 </ul>
