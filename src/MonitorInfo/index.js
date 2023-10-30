@@ -53,7 +53,7 @@ function MonitorInfo(
     //     dataMonitor.measures.filter((value) => value.timestamp <= endDate.getTime()/1000 && value.timestamp >= startDate.getTime()/1000 )
     // );
 
-let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).toLocaleDateString());
+let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).toLocaleString());
 
 
 // let timestamp = dataMonitor.measures.map((value) => value.timestamp);
@@ -219,7 +219,7 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
                                 let timestamp = dataMonitor.measures.map((value) => value.timestamp);
 
                                 setdataFilterMonitor(
-                                    dataMonitor.measures.filter((value) => value.timestamp <= endDate.getTime()/1000 && value.timestamp >= startDate.getTime()/1000)
+                                    dataMonitor.measures.filter((value) => value.timestamp <= (endDate.getTime()/1000+85399) && value.timestamp >= startDate.getTime()/1000)
                                 );
 
                                 console.log(dataFilterMonitor);// dos decimales
