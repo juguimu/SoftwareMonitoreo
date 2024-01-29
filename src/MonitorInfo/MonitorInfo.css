@@ -53,7 +53,7 @@
 
 .valuesboxes-data{
     display: grid;
-    grid-template-columns: repeat(3,300px);
+    grid-template-columns: repeat(2,300px);
     align-items: center;
     justify-content: center;
     gap: 100px;

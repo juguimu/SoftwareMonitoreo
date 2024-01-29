@@ -101,7 +101,7 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
                 
                 ticks: {
                     autoSkip: true,
-                    maxTicksLimit: 10
+                    maxTicksLimit: 3
                 }
                 
                
@@ -125,7 +125,9 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
 
     let fprom = f.reduce((acum,x)=>acum+x,0)/f.length;
 
-    
+    let Cs = dataFilterMonitor.map((value) => value.values[3]);
+
+    let CsR = Cs[Cs.length-1]-Cs[0];
 
     
 
@@ -215,14 +217,24 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
                             </div>
 
                             <button className='update-button' onClick={()=>{
+                                let dateStart = startDate;
+                                dateStart.setHours(0);
+                                dateStart.setMinutes(0);
+                                dateStart.setSeconds(0);
 
-                                let timestamp = dataMonitor.measures.map((value) => value.timestamp);
+                                let dateEnd = endDate;
+                                dateEnd.setHours(23);
+                                dateEnd.setMinutes(59);
+                                dateEnd.setSeconds(59);
+
+                                console.log(dateStart);
+                                console.log(dateEnd);
 
                                 setdataFilterMonitor(
-                                    dataMonitor.measures.filter((value) => value.timestamp <= (endDate.getTime()/1000+85399) && value.timestamp >= startDate.getTime()/1000)
+                                    dataMonitor.measures.filter((value) => value.timestamp <= (dateEnd.getTime()/1000) && value.timestamp >= dateStart.getTime()/1000)
                                 );
 
-                                console.log(dataFilterMonitor);// dos decimales
+                                // console.log(dataFilterMonitor);// dos decimales
 
                             }}>Actualizar</button>
 
@@ -269,6 +281,13 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
                     <p>Frecuencia</p>
                     <div>
                         <p>{`${fprom.toFixed(2)}Hz`}</p>
+                    </div>
+                </div>
+
+                <div className='data-box'>
+                    <p>Consumo</p>
+                    <div>
+                        <p>{`${CsR.toFixed(2)}kW/h`}</p>
                     </div>
                 </div>
 
