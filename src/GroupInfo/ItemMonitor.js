@@ -30,85 +30,90 @@ function ItemMonitor(
                 ],
                 "clientId":"1053779590"}; 
                 
-                let startDate = stringmonitorData.measures[0].timestamp;
-                let endDate = stringmonitorData.measures[
-                    stringmonitorData.measures.length-1].timestamp;
+                // let startDate = stringmonitorData.measures[0].timestamp;
+                // let endDate = stringmonitorData.measures[
+                //     stringmonitorData.measures.length-1].timestamp;
                 
-                props.setStartDate(new Date(startDate*1000));
-                props.setEndDate(new Date(endDate*1000));
+                // props.setStartDate(new Date(startDate*1000));
+                // props.setEndDate(new Date(endDate*1000));
 
-                props.setdataFilterMonitor(
-                    stringmonitorData.measures.filter((value) => 
-                    value.timestamp <= endDate && 
-                        value.timestamp >= startDate)
-                );
+                // props.setdataFilterMonitor(
+                //     stringmonitorData.measures.filter((value) => 
+                //     value.timestamp <= endDate && 
+                //         value.timestamp >= startDate)
+                // );
 
-                props.setdataMonitor(stringmonitorData);
+                // props.setdataMonitor(stringmonitorData);
                 
-                        // console.log(data);
-                props.setshowWindow(
-                    {
-                        "loggingWindow":"inactive",
-                        "navBar":"",
-                        "userInfoWindow":"inactive",
-                        "groupInfoWindow":"inactive",
-                        "monitorInfoWindow":""
-                    }
-                );
-                props.setshownavOptions(
-                    {
-                        "navGroup":"",
-                        "navMonitors":""
-                    }                          
-                ); 
-
-                props.setnavbarValues({...props.navbarValues,
-                    "monitorName": props.name
-                });
-
-
-                // const url = 'https://vu5h0yvf80.execute-api.us-west-2.amazonaws.com/client/'+props.groupData.clientId+'/'+props.groupData.clientGroupMonitorId+'.'+props.monitorId;
-                //     fetch(url).then(response => response.json()).then(data =>{
-                        
-                //         let startDate = data.measures[0].timestamp;
-                //         let endDate = data.measures[
-                //         data.measures.length-1].timestamp;
-                
-                //         props.setStartDate(new Date(startDate*1000));
-                //         props.setEndDate(new Date(endDate*1000+85399));
-
-                //         props.setdataFilterMonitor(
-                //             data.measures.filter((value) => 
-                //             value.timestamp <= endDate && 
-                //             value.timestamp >= startDate)
-                //             );
-                        
-                        
-                        
-                        
-                        
-                //         props.setdataMonitor(data);
                 //         // console.log(data);
-                //         props.setshowWindow(
-                //             {
-                //                 "loggingWindow":"inactive",
-                //                 "navBar":"",
-                //                 "userInfoWindow":"inactive",
-                //                 "groupInfoWindow":"inactive",
-                //                 "monitorInfoWindow":""
-                //             }
-                //         );
-                //         props.setshownavOptions(
-                //             {
-                //                 "navGroup":"",
-                //                 "navMonitors":""
-                //             }                          
-                //         );
-                //         props.setnavbarValues({...props.navbarValues,
-                //             "monitorName": props.name
-                //         });                                            
+                // props.setshowWindow(
+                //     {
+                //         "loggingWindow":"inactive",
+                //         "navBar":"",
+                //         "userInfoWindow":"inactive",
+                //         "groupInfoWindow":"inactive",
+                //         "monitorInfoWindow":""
                 //     }
-                //     );
+                // );
+                // props.setshownavOptions(
+                //     {
+                //         "navGroup":"",
+                //         "navMonitors":""
+                //     }                          
+                // ); 
+
+                // props.setnavbarValues({...props.navbarValues,
+                //     "monitorName": props.name
+                // });
+                console.log(props.groupData.clientId);
+                console.log(props.groupData.clientGroupMonitorId);
+                console.log(props.monitorId);
+                console.log(stringmonitorData);
+
+                const url = 'https://vu5h0yvf80.execute-api.us-west-2.amazonaws.com/client/'+props.groupData.clientId+'/'+props.groupData.clientGroupMonitorId+'.'+props.monitorId+'?fd=2024-01-01&ld=2024-12-31';
+                    fetch(url).then(response => response.json()).then(data =>{
+                        console.log(data);
+                        let startDate = data.measures[0].timestamp;
+                        let endDate = data.measures[
+                        data.measures.length-1].timestamp;
+                        console.log(endDate);
+                        console.log(startDate);
+                        props.setStartDate(new Date(startDate*1000));
+                        props.setEndDate(new Date(endDate*1000));
+                        console.log(data.measures);
+                        props.setdataFilterMonitor(
+                            data.measures
+                            // .filter((value) => 
+                            // value.timestamp <= endDate && 
+                            // value.timestamp >= startDate)
+                            );
+                        
+                        
+                        
+                        
+                        
+                        props.setdataMonitor(data);
+                        // console.log(data);
+                        props.setshowWindow(
+                            {
+                                "loggingWindow":"inactive",
+                                "navBar":"",
+                                "userInfoWindow":"inactive",
+                                "groupInfoWindow":"inactive",
+                                "monitorInfoWindow":""
+                            }
+                        );
+                        props.setshownavOptions(
+                            {
+                                "navGroup":"",
+                                "navMonitors":""
+                            }                          
+                        );
+                        props.setnavbarValues({...props.navbarValues,
+                            "monitorName": props.name
+                        });                                            
+                    }
+                    );
             }
             }
             
