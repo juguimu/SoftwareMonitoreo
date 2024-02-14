@@ -126,6 +126,7 @@ function App() {
       <MonitorInfo
         showWindow={showWindow}
         dataMonitor={dataMonitor}
+        setdataMonitor={setdataMonitor}
         navbarValues={navbarValues}
         startDate = {startDate}
         setStartDate = {setStartDate}

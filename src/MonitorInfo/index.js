@@ -38,6 +38,7 @@ ChartJS.register(
 function MonitorInfo(
     {showWindow,
     dataMonitor,
+    setdataMonitor,
     navbarValues,
     startDate,
     setStartDate,
@@ -114,10 +115,10 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
     // promedios
     
     let Va = dataFilterMonitor.map((value) => parseFloat(value.values[0]));
-    console.log(Va)
+    //console.log(Va)
 
     let Vaprom = Va.reduce((acum,x)=>acum+x)/Va.length;
-    console.log(Va.length)
+    //console.log(Va.length)
 
     let Ia = dataFilterMonitor.map((value) => parseFloat(value.values[1]));
 
@@ -231,6 +232,46 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
 
                                 console.log(dateStart);
                                 console.log(dateEnd);
+
+                                console.log(dataMonitor.clientGroupMonitorId);
+
+                                const url = 'https://vu5h0yvf80.execute-api.us-west-2.amazonaws.com/client/'+dataMonitor.clientId+'/'+dataMonitor.clientGroupMonitorId
+                                                                                            +'?fd='+`${startDate.getFullYear()}-`
+                                                                                            +`0${startDate.getMonth()+1}`.slice(-2)+'-'
+                                                                                            +`0${startDate.getDate()}`.slice(-2)
+                                                                                            +' '
+                                                                                            +`0${startDate.getHours()}:`.slice(-3)
+                                                                                            +`0${startDate.getMinutes()}:`.slice(-3)
+                                                                                            +`0${startDate.getSeconds()}`.slice(-2)
+                                                                                            +'&ld='
+                                                                                            +`${endDate.getFullYear()}-`
+                                                                                            +`0${endDate.getMonth()+1}`.slice(-2)+'-'
+                                                                                            +`0${endDate.getDate()}`.slice(-2)
+                                                                                            +' '
+                                                                                            +`0${endDate.getHours()}:`.slice(-3)
+                                                                                            +`0${endDate.getMinutes()}:`.slice(-3)
+                                                                                            +`0${endDate.getSeconds()}`.slice(-2);
+                                console.log(url);
+
+                                fetch(url).then(response => response.json()).then(data =>{
+                                    
+                                    data.measures.reverse();
+                                    setdataFilterMonitor(
+                                        data.measures
+                                        // .filter((value) => 
+                                        // value.timestamp <= endDate && 
+                                        // value.timestamp >= startDate)
+                                        );
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    setdataMonitor(data);
+                                    // console.log(data);
+                                                                               
+                                }
+                                );
 
                                 setdataFilterMonitor(
                                     dataMonitor.measures.filter((value) => value.timestamp <= (dateEnd.getTime()/1000) && value.timestamp >= dateStart.getTime()/1000)
