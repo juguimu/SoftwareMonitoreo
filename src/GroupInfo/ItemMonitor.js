@@ -70,17 +70,42 @@ function ItemMonitor(
                 console.log(props.monitorId);
                 console.log(stringmonitorData);
 
-                const url = 'https://vu5h0yvf80.execute-api.us-west-2.amazonaws.com/client/'+props.groupData.clientId+'/'+props.groupData.clientGroupMonitorId+'.'+props.monitorId+'?fd=2024-01-01&ld=2024-12-31';
+                let startDate = new Date();
+                let endDate = new Date();
+                startDate.setHours(-(24-endDate.getHours()));
+                console.log(startDate);
+                console.log(endDate);
+
+                
+                const url = 'https://vu5h0yvf80.execute-api.us-west-2.amazonaws.com/client/'+props.groupData.clientId+'/'+props.groupData.clientGroupMonitorId+'.'
+                                                                                            +props.monitorId+
+                                                                                            '?fd='+`${startDate.getFullYear()}-`
+                                                                                            +`0${startDate.getMonth()}`.slice(-2)+'-'
+                                                                                            +`0${startDate.getDay()}`.slice(-2)
+                                                                                            // +'T'
+                                                                                            // +`0${startDate.getHours()}:`.slice(-3)
+                                                                                            // +`0${startDate.getMinutes()}:`.slice(-3)
+                                                                                            // +`0${startDate.getSeconds()}`.slice(-2)
+                                                                                            +'&ld='
+                                                                                            +`${endDate.getFullYear()}-`
+                                                                                            +`0${endDate.getMonth()}`.slice(-2)+'-'
+                                                                                            +`0${endDate.getDay()}`.slice(-2);
+                                                                                            // +'T'
+                                                                                            // +`0${endDate.getHours()}:`.slice(-3)
+                                                                                            // +`0${endDate.getMinutes()}:`.slice(-3)
+                                                                                            // +`0${endDate.getSeconds()}`.slice(-2);
+
+                console.log(url);                                                                            
                     fetch(url).then(response => response.json()).then(data =>{
                         console.log(data);
-                        let startDate = data.measures[0].timestamp;
-                        let endDate = data.measures[
-                        data.measures.length-1].timestamp;
+                        //let endDate = data.measures[0].timestamp;
+                        //let startDate = data.measures[
+                        //data.measures.length-1].timestamp;
                         console.log(endDate);
                         console.log(startDate);
-                        props.setStartDate(new Date(startDate*1000));
-                        props.setEndDate(new Date(endDate*1000));
-                        console.log(data.measures);
+                        props.setStartDate(startDate);
+                        props.setEndDate(endDate);
+                        console.log(data.measures.reverse());
                         props.setdataFilterMonitor(
                             data.measures
                             // .filter((value) => 

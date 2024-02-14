@@ -113,19 +113,21 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
 
     // promedios
     
-    let Va = dataFilterMonitor.map((value) => value.values[0]);
+    let Va = dataFilterMonitor.map((value) => parseFloat(value.values[0]));
+    console.log(Va)
 
-    let Vaprom = Va.reduce((acum,x)=>acum+x,0)/Va.length;
+    let Vaprom = Va.reduce((acum,x)=>acum+x)/Va.length;
+    console.log(Va.length)
 
-    let Ia = dataFilterMonitor.map((value) => value.values[1]);
+    let Ia = dataFilterMonitor.map((value) => parseFloat(value.values[1]));
 
     let Iaprom = Ia.reduce((acum,x)=>acum+x,0)/Ia.length;
 
-    let f = dataFilterMonitor.map((value) => value.values[4]);
+    let f = dataFilterMonitor.map((value) => parseFloat(value.values[4]));
 
     let fprom = f.reduce((acum,x)=>acum+x,0)/f.length;
 
-    let Cs = dataFilterMonitor.map((value) => value.values[3]);
+    let Cs = dataFilterMonitor.map((value) => parseFloat(value.values[3]));
 
     let CsR = Cs[Cs.length-1]-Cs[0];
 
