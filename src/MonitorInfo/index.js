@@ -255,9 +255,9 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
 
                                 fetch(url).then(response => response.json()).then(data =>{
                                     
-                                    data.measures.reverse();
+                                    
                                     setdataFilterMonitor(
-                                        data.measures
+                                        data.measures.reverse()
                                         // .filter((value) => 
                                         // value.timestamp <= endDate && 
                                         // value.timestamp >= startDate)
