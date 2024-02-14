@@ -73,23 +73,24 @@ function ItemMonitor(
                 let startDate = new Date();
                 let endDate = new Date();
                 startDate.setHours(-(24-endDate.getHours()));
+                //startDate.setMonth(0);
                 console.log(startDate);
-                console.log(endDate);
+                console.log(endDate.getDay());
 
                 
                 const url = 'https://vu5h0yvf80.execute-api.us-west-2.amazonaws.com/client/'+props.groupData.clientId+'/'+props.groupData.clientGroupMonitorId+'.'
                                                                                             +props.monitorId+
                                                                                             '?fd='+`${startDate.getFullYear()}-`
-                                                                                            +`0${startDate.getMonth()}`.slice(-2)+'-'
-                                                                                            +`0${startDate.getDay()}`.slice(-2)
+                                                                                            +`0${startDate.getMonth()+1}`.slice(-2)+'-'
+                                                                                            +`0${startDate.getDate()}`.slice(-2)
                                                                                             // +'T'
                                                                                             // +`0${startDate.getHours()}:`.slice(-3)
                                                                                             // +`0${startDate.getMinutes()}:`.slice(-3)
                                                                                             // +`0${startDate.getSeconds()}`.slice(-2)
                                                                                             +'&ld='
                                                                                             +`${endDate.getFullYear()}-`
-                                                                                            +`0${endDate.getMonth()}`.slice(-2)+'-'
-                                                                                            +`0${endDate.getDay()}`.slice(-2);
+                                                                                            +`0${endDate.getMonth()+1}`.slice(-2)+'-'
+                                                                                            +`0${endDate.getDate()}`.slice(-2);
                                                                                             // +'T'
                                                                                             // +`0${endDate.getHours()}:`.slice(-3)
                                                                                             // +`0${endDate.getMinutes()}:`.slice(-3)
