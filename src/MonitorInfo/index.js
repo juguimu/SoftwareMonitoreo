@@ -330,7 +330,7 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
                 <div className='data-box'>
                     <p>Consumo</p>
                     <div>
-                        <p>{`${CsR.toFixed(2)}kW/h`}</p>
+                        <p>{`${CsR.toFixed(2)}kWh`}</p>
                     </div>
                 </div>
 
