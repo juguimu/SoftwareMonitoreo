@@ -1,5 +1,6 @@
 import React from 'react';
 import './UserNav.css';
+import { MobileIcon } from './MobileIcon';
 
 
 function UserNav(
@@ -17,6 +18,10 @@ function UserNav(
     <nav className={`user-nav ${showWindow.navBar}`}>
         <div className="left-nav">
             <p>SIMoT</p>            
+        </div>
+
+        <div className='right-icon'>
+            <MobileIcon/>
         </div>
 
         <div className="right-nav">

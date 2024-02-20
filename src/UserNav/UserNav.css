@@ -52,6 +52,25 @@
     
 }
 
+.right-icon{
+    display: none;
+}
+
 .inactive{
     display: none;
+}
+
+
+@media (max-width: 640px){
+
+    .right-nav{
+        display: none;
+
+    }
+
+    .right-icon{
+        display: contents;
+    }
+    
+    
 }
