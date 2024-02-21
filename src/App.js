@@ -22,7 +22,8 @@ function App() {
   const [shownavOptions,setshownavOptions]=React.useState(
     {
       "navGroup":"inactive",
-      "navMonitors":"inactive"
+      "navMonitors":"inactive",
+      "boxMenu":"inactive"
     }
   );
 
