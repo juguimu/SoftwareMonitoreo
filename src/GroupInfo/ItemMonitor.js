@@ -132,7 +132,8 @@ function ItemMonitor(
                         props.setshownavOptions(
                             {
                                 "navGroup":"",
-                                "navMonitors":""
+                                "navMonitors":"",
+                                "boxMenu":"inactive"
                             }                          
                         );
                         props.setnavbarValues({...props.navbarValues,

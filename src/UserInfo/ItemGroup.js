@@ -51,7 +51,8 @@ function ItemGroup(
                                 props.setshownavOptions(
                                     {
                                         "navGroup":"",
-                                        "navMonitors":"inactive"
+                                        "navMonitors":"inactive",
+                                        "boxMenu":"inactive"
                                     }
                                 );
                                 props.setnavbarValues({...props.navbarValues,
