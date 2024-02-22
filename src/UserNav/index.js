@@ -20,17 +20,7 @@ function UserNav(
             <p>SIMoT</p>            
         </div>
 
-        <div className='right-icon'
-            onClick={()=>{
-                setshownavOptions(
-                    {
-                        ...shownavOptions,
-                        "boxMenu":""
-                    } 
-                );
-            }}
-            ><MobileIcon/>
-        </div>
+        
 
         <div className={`mobile-box ${shownavOptions.boxMenu}`}>
             <ul>
@@ -45,6 +35,13 @@ function UserNav(
                             "groupInfoWindow":"inactive",
                             "monitorInfoWindow":"inactive"
                             }
+                        );
+
+                        setshownavOptions(
+                            {
+                                ...shownavOptions,
+                                "boxMenu":"inactive"
+                            } 
                         );
 
                     }}
@@ -65,6 +62,13 @@ function UserNav(
                             }
                         );
 
+                        setshownavOptions(
+                            {
+                                ...shownavOptions,
+                                "boxMenu":"inactive"
+                            } 
+                        );
+
                     }}
                     >{navbarValues.groupName}</a>
                 </li>
@@ -79,6 +83,13 @@ function UserNav(
                             "groupInfoWindow":"inactive",
                             "monitorInfoWindow":""
                             }
+                        );
+
+                        setshownavOptions(
+                            {
+                                ...shownavOptions,
+                                "boxMenu":"inactive"
+                            } 
                         );
 
                     }}
@@ -133,6 +144,29 @@ function UserNav(
             </ul>
         </div>
 
+        <div className='right-icon'
+            onClick={()=>{
+                if(shownavOptions.boxMenu==""){
+                    setshownavOptions(
+                        {
+                            ...shownavOptions,
+                            "boxMenu":"inactive"
+                        } 
+                    );
+                }
+                else{
+                    setshownavOptions(
+                        {
+                            ...shownavOptions,
+                            "boxMenu":""
+                        } 
+                    );
+
+                }
+            }}
+            ><MobileIcon/>
+        </div>
+
         <div className="right-nav">
             <ul>
                 <li>
@@ -166,6 +200,8 @@ function UserNav(
                             }
                         );
 
+                        
+
                     }}
                     >{navbarValues.groupName}</a>
                 </li>
@@ -181,6 +217,8 @@ function UserNav(
                             "monitorInfoWindow":""
                             }
                         );
+
+                        
 
                     }}
                     >{navbarValues.monitorName}</a>
@@ -224,7 +262,8 @@ function UserNav(
                         setshownavOptions(
                             {
                                 "navGroup":"inactive",
-                                "navMonitors":"inactive"
+                                "navMonitors":"inactive",
+                                "boxMenu":"inactive"
                             }                          
                         );
                     }}

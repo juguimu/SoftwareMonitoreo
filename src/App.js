@@ -6,6 +6,7 @@ import { UserNav } from './UserNav/';
 import { GroupInfo } from './GroupInfo';
 import { MonitorInfo } from './MonitorInfo';
 
+
  
 
 function App() {
@@ -92,6 +93,10 @@ function App() {
         navbarValues ={navbarValues}
 
       />
+
+      
+
+
       <UserLogging
         userData={userData}
         setuserData={setuserData}
