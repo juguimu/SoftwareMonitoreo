@@ -1,0 +1,465 @@
+{
+  "service": {
+    "service": "energy-monitor-front",
+    "serviceObject": {
+      "name": "energy-monitor-front"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs20.x",
+      "profile": "default",
+      "region": "us-west-2",
+      "stage": "dev",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ServerlessDeploymentBucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+              "Bucket": {
+                "Ref": "ServerlessDeploymentBucket"
+              },
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Action": "s3:*",
+                    "Effect": "Deny",
+                    "Principal": "*",
+                    "Resource": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            }
+                          ]
+                        ]
+                      }
+                    ],
+                    "Condition": {
+                      "Bool": {
+                        "aws:SecureTransport": false
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FrontPageWebsiteBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketName": "energy-monitor-front-bucket"
+            }
+          },
+          "FrontPageWebsiteBucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+              "Bucket": {
+                "Ref": "FrontPageWebsiteBucket"
+              },
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "s3:GetObject"
+                    ],
+                    "Resource": {
+                      "Fn::Join": [
+                        "/",
+                        [
+                          {
+                            "Fn::GetAtt": [
+                              "FrontPageWebsiteBucket",
+                              "Arn"
+                            ]
+                          },
+                          "*"
+                        ]
+                      ]
+                    },
+                    "Principal": {
+                      "CanonicalUser": {
+                        "Fn::GetAtt": [
+                          "FrontPageWebsiteOriginAccessIdentity",
+                          "S3CanonicalUserId"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FrontPageWebsiteOriginAccessIdentity": {
+            "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+            "Properties": {
+              "CloudFrontOriginAccessIdentityConfig": {
+                "Comment": "Origin Access Identity to Access Website Bucket"
+              }
+            }
+          },
+          "FrontPageCloudFront": {
+            "Type": "AWS::CloudFront::Distribution",
+            "DependsOn": [
+              "FrontPageWebsiteBucket"
+            ],
+            "Properties": {
+              "DistributionConfig": {
+                "Origins": [
+                  {
+                    "DomainName": {
+                      "Fn::GetAtt": [
+                        "FrontPageWebsiteBucket",
+                        "RegionalDomainName"
+                      ]
+                    },
+                    "Id": "S3Origin",
+                    "S3OriginConfig": {
+                      "OriginAccessIdentity": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "origin-access-identity",
+                            "cloudfront",
+                            {
+                              "Ref": "FrontPageWebsiteOriginAccessIdentity"
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "CustomErrorResponses": [
+                  {
+                    "ErrorCachingMinTTL": 0,
+                    "ErrorCode": 403,
+                    "ResponseCode": 200,
+                    "ResponsePagePath": "/index.html"
+                  }
+                ],
+                "DefaultCacheBehavior": {
+                  "AllowedMethods": [
+                    "GET",
+                    "HEAD"
+                  ],
+                  "Compress": true,
+                  "ForwardedValues": {
+                    "QueryString": true,
+                    "Cookies": {
+                      "Forward": "none"
+                    }
+                  },
+                  "TargetOriginId": "S3Origin",
+                  "ViewerProtocolPolicy": "redirect-to-https"
+                },
+                "Comment": "my example website in s3",
+                "DefaultRootObject": "index.html",
+                "Enabled": true,
+                "HttpVersion": "http2",
+                "PriceClass": "PriceClass_All",
+                "ViewerCertificate": {
+                  "CloudFrontDefaultCertificate": true
+                }
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            },
+            "Export": {
+              "Name": "sls-energy-monitor-front-dev-ServerlessDeploymentBucketName"
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ServerlessDeploymentBucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+              "Bucket": {
+                "Ref": "ServerlessDeploymentBucket"
+              },
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Action": "s3:*",
+                    "Effect": "Deny",
+                    "Principal": "*",
+                    "Resource": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            }
+                          ]
+                        ]
+                      }
+                    ],
+                    "Condition": {
+                      "Bool": {
+                        "aws:SecureTransport": false
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "bucketName": "energy-monitor-front-bucket",
+      "s3Sync": [
+        {
+          "bucketName": "energy-monitor-front-bucket",
+          "localDir": "build/"
+        }
+      ]
+    },
+    "plugins": [
+      "serverless-s3-sync"
+    ],
+    "pluginsData": {},
+    "functions": {},
+    "resources": {
+      "Resources": {
+        "FrontPageWebsiteBucket": {
+          "Type": "AWS::S3::Bucket",
+          "Properties": {
+            "BucketName": "energy-monitor-front-bucket"
+          }
+        },
+        "FrontPageWebsiteBucketPolicy": {
+          "Type": "AWS::S3::BucketPolicy",
+          "Properties": {
+            "Bucket": {
+              "Ref": "FrontPageWebsiteBucket"
+            },
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject"
+                  ],
+                  "Resource": {
+                    "Fn::Join": [
+                      "/",
+                      [
+                        {
+                          "Fn::GetAtt": [
+                            "FrontPageWebsiteBucket",
+                            "Arn"
+                          ]
+                        },
+                        "*"
+                      ]
+                    ]
+                  },
+                  "Principal": {
+                    "CanonicalUser": {
+                      "Fn::GetAtt": [
+                        "FrontPageWebsiteOriginAccessIdentity",
+                        "S3CanonicalUserId"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "FrontPageWebsiteOriginAccessIdentity": {
+          "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+          "Properties": {
+            "CloudFrontOriginAccessIdentityConfig": {
+              "Comment": "Origin Access Identity to Access Website Bucket"
+            }
+          }
+        },
+        "FrontPageCloudFront": {
+          "Type": "AWS::CloudFront::Distribution",
+          "DependsOn": [
+            "FrontPageWebsiteBucket"
+          ],
+          "Properties": {
+            "DistributionConfig": {
+              "Origins": [
+                {
+                  "DomainName": {
+                    "Fn::GetAtt": [
+                      "FrontPageWebsiteBucket",
+                      "RegionalDomainName"
+                    ]
+                  },
+                  "Id": "S3Origin",
+                  "S3OriginConfig": {
+                    "OriginAccessIdentity": {
+                      "Fn::Join": [
+                        "/",
+                        [
+                          "origin-access-identity",
+                          "cloudfront",
+                          {
+                            "Ref": "FrontPageWebsiteOriginAccessIdentity"
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ],
+              "CustomErrorResponses": [
+                {
+                  "ErrorCachingMinTTL": 0,
+                  "ErrorCode": 403,
+                  "ResponseCode": 200,
+                  "ResponsePagePath": "/index.html"
+                }
+              ],
+              "DefaultCacheBehavior": {
+                "AllowedMethods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "Compress": true,
+                "ForwardedValues": {
+                  "QueryString": true,
+                  "Cookies": {
+                    "Forward": "none"
+                  }
+                },
+                "TargetOriginId": "S3Origin",
+                "ViewerProtocolPolicy": "redirect-to-https"
+              },
+              "Comment": "my example website in s3",
+              "DefaultRootObject": "index.html",
+              "Enabled": true,
+              "HttpVersion": "http2",
+              "PriceClass": "PriceClass_All",
+              "ViewerCertificate": {
+                "CloudFrontDefaultCertificate": true
+              }
+            }
+          }
+        }
+      },
+      "Outputs": {}
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless.yml",
+    "initialServerlessConfig": {
+      "service": "energy-monitor-front",
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
+      },
+      "resources": {
+        "$ref": "$[\"service\"][\"resources\"]"
+      }
+    },
+    "layers": {},
+    "isDashboardMonitoringPreconfigured": false
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/energy-monitor-front/dev/1708793034179-2024-02-24T16:43:54.179Z",
+    "artifact": ""
+  }
+}
