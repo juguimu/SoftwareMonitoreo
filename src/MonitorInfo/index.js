@@ -254,7 +254,14 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
                                 console.log(url);
 
                                 fetch(url).then(response => response.json()).then(data =>{
-                                    
+                                    let endDated = data.measures[0].timestamp;
+                                    let startDated = data.measures[
+                                    data.measures.length-1].timestamp;
+                                    console.log(endDated);
+                                    console.log(startDated);
+                                    setStartDate(new Date(startDated*1000));
+                                    setEndDate(new Date(endDated*1000));
+                                    console.log(data.measures);
                                     
                                     setdataFilterMonitor(
                                         data.measures.reverse()
@@ -273,9 +280,9 @@ let timestamp = dataFilterMonitor.map((value) => new Date(value.timestamp*1000).
                                 }
                                 );
 
-                                setdataFilterMonitor(
-                                    dataMonitor.measures.filter((value) => value.timestamp <= (dateEnd.getTime()/1000) && value.timestamp >= dateStart.getTime()/1000)
-                                );
+                                // setdataFilterMonitor(
+                                //     dataMonitor.measures.filter((value) => value.timestamp <= (dateEnd.getTime()/1000) && value.timestamp >= dateStart.getTime()/1000)
+                                // );
 
                                 // console.log(dataFilterMonitor);// dos decimales
 

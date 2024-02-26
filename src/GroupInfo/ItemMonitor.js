@@ -99,13 +99,13 @@ function ItemMonitor(
                 console.log(url);                                                                            
                     fetch(url).then(response => response.json()).then(data =>{
                         console.log(data);
-                        //let endDate = data.measures[0].timestamp;
-                        //let startDate = data.measures[
-                        //data.measures.length-1].timestamp;
-                        console.log(endDate);
-                        console.log(startDate);
-                        props.setStartDate(startDate);
-                        props.setEndDate(endDate);
+                        let endDated = data.measures[0].timestamp;
+                        let startDated = data.measures[
+                        data.measures.length-1].timestamp;
+                        console.log(endDated);
+                        console.log(startDated);
+                        props.setStartDate(new Date(startDated*1000));
+                        props.setEndDate(new Date(endDated*1000));
                         console.log(data.measures.reverse());
                         props.setdataFilterMonitor(
                             data.measures
