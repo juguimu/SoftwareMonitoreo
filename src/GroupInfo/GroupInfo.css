@@ -1,22 +1,25 @@
-.title{
-    font-size: var(--lg);
-    font-weight: bold;
-}
+
 
 .data-monitor{
 
 display: flex;
 flex-direction: column;
-align-items: center;
+align-items: baseline;
+padding: 10%;
 }
 
-
+.title{
+    font-size: var(--lg);
+    font-weight: bold;
+    text-align: center;
+    width: -webkit-fill-available;
+}
 
 
 
 .user-monitor{
 margin-top: 40px;
-width: 300px;
+width: -webkit-fill-available;
 display: flex;
 flex-direction: column;
 }

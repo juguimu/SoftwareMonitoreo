@@ -2,11 +2,17 @@
        
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
+    align-content: space-around;
+    padding: 10%;
     justify-items: center;
 }
 
+
+.title {
+    font-size: var(--lg);
+    font-weight: bold;
+    text-align: center;
+}
 /* .user-data{
     width: 300px;
     display: grid;
@@ -16,7 +22,7 @@
 .user-item{
     font-size: var(--sm);
     font-weight: 50%;
-    width: 400px;
+    width: auto;
 }
 
 .value{
@@ -26,9 +32,10 @@
 
 .user-groups{
     margin-top: 4px;
-    width: 400px;
     display: flex;
+    width: auto;
     flex-direction: column;
+    align-items: baseline;
 }
 /* 
 .user-groups p{
@@ -40,6 +47,7 @@
     list-style: disc;
     margin: 0;
     padding: 0;
+    width: auto;
 }
 
 .user-groups ul li{
