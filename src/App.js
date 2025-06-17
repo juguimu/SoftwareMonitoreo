@@ -52,7 +52,7 @@ function App() {
       "variables":["V_A","I_A","PA_A","EA_A_I","F","FP_A"],
       "isActive":0,
       "clientGroupMonitorId":"74f9ae48-36ce-4b4e-bdd3-3899fa886b02.796b2cc2-b848-4e16-bf17-ff506b5d0602",
-      "clientId":"1053779590",
+      "clientId":"123456",
       "measures":[{"timestamp":0,"values":[0,0,0,0,0,0]}]
     }
   );
