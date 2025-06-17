@@ -12,6 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: auto;
   }
 
   .table-header{
@@ -29,10 +30,12 @@
     grid-template-columns: repeat(2,500px);
     gap: 40px;
     margin-bottom: 40px;
+    width:auto;
 }
 
 .item-figure{
     height: 300px;
+    width: auto;
 }
 
 .update-button{
@@ -90,4 +93,15 @@
 
 .inactive{
     display: none;
+}
+
+
+@media (max-width: 640px){
+    .figures-data{
+        display: grid;
+        grid-template-columns: repeat(1,100%);
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+
 }

@@ -52,6 +52,52 @@
     
 }
 
+.mobile-box{
+    display: none;
+}
+
+.mobile-box ul{
+    list-style: none;
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    height: auto;
+    top: 30px;
+    background: #FFFFFF;
+    width: 250px;
+    border: 1px solid var(--black);
+    padding: 20px 20px 0 20px;
+
+}
+
+.mobile-box ul a:hover{
+    border: 1px solid var(--black);
+    font-weight: bold;
+}
+
+.right-icon{
+    display: none;
+}
+
 .inactive{
     display: none;
+}
+
+
+@media (max-width: 640px){
+
+    .right-nav{
+        display: none;
+
+    }
+
+    .right-icon{
+        display: contents;
+    }
+
+    .mobile-box{
+        display: contents;
+    }
+    
+    
 }
